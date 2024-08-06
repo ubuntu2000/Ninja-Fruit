@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Fruits
+  - Bom
+  - DeadZone
   layers:
   - Default
   - TransparentFX
@@ -11,10 +14,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Fruits
+  - Bom
+  - Death
   - 
   - 
   - 
@@ -38,6 +41,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 1846664357
+    locked: 0
+  - name: GameObj
+    uniqueID: 1372394197
+    locked: 0
+  - name: Front
+    uniqueID: 3035926007
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
