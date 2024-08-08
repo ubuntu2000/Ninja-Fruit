@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6893206104489779194}
   - component: {fileID: 8174008095657857557}
   - component: {fileID: 8505873673078509687}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tao
   m_TagString: Fruits
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9161198256311897700}
   - component: {fileID: -7860792622714048269}
   - component: {fileID: -805703332676691055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dua hau
   m_TagString: Fruits
   m_Icon: {fileID: 0}

@@ -49,11 +49,11 @@ namespace GameBasic
         {
             if (col.gameObject.CompareTag(Const.PLAYER_TAG))
             {
-                m_vacham.Score++;
-                int coinsbonus = 100;
-                Pref.Coins += coinsbonus;
+                //m_vacham.Score++;
+                int scorebonus = 100;
+                Pref.Score += scorebonus;
                 if (m_vacham.guiMng)
-                    m_vacham.guiMng.UpdateGamePlayCoin();
+                    m_vacham.guiMng.UpdateGamePlayScore();
                 Destroy(gameObject);
                 Debug.Log("Đa va cham voi hop");
             }

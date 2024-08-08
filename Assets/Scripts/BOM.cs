@@ -26,7 +26,7 @@ namespace GameBasic
         }
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.CompareTag("DeadZone"))
+            if (col.gameObject.CompareTag(Const.DEADZONE_TAG))
             {
 
                 
@@ -37,7 +37,7 @@ namespace GameBasic
         }
         private void OnCollisionEnter2D(Collision2D col)
         {
-            if (col.gameObject.CompareTag("Sticker"))
+            if (col.gameObject.CompareTag(Const.PLAYER_TAG))
             {
                
                 Destroy(gameObject);

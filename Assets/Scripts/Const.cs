@@ -18,7 +18,7 @@ namespace GameBasic
         public const string ENEMY_LAYER = "Enemy";
 
         // Dat hang so cho cac doi tuong UI va (SAVE and Load)
-
+        public const string SCORE_PREF = "Score";
         public const string BEST_SCORE_PREF = "BestScore";
         public const string PLAYER_PREFIX_PREF = "Player_";
         public const string CUR_PLAYER_ID_PREF = "CurPlayerID";

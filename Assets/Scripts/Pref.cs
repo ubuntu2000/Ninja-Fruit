@@ -24,6 +24,11 @@ namespace GameBasic
             set => PlayerPrefs.SetInt(Const.CUR_PLAYER_ID_PREF, value);
             get => PlayerPrefs.GetInt(Const.CUR_PLAYER_ID_PREF, 0);
         }
+        public static int Score
+        {
+            set => PlayerPrefs.SetInt(Const.SCORE_PREF, value);
+            get => PlayerPrefs.GetInt(Const.SCORE_PREF, 0);
+        }
         public static int Coins
         {
             set => PlayerPrefs.SetInt(Const.COINS_PREF, value);
