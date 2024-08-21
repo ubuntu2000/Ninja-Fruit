@@ -50,8 +50,8 @@ namespace GameBasic
             if (col.gameObject.CompareTag(Const.PLAYER_TAG))
             {
                 //m_vacham.Score++;
-                int scorebonus = 100;
-                Pref.Score += scorebonus;
+
+                m_vacham.AddScore();
                 if (m_vacham.guiMng)
                     m_vacham.guiMng.UpdateGamePlayScore();
                 Destroy(gameObject);

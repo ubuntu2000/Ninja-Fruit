@@ -35,7 +35,15 @@ namespace GameBasic
         public GameObject m_deadzone;
         private bool m_IsGameOver;
         private int m_score;
+
+        public float timeLimit;
+        private float m_curtimeLimit;
+        private  int m_curScore;
+        private int m_newScore;
         
+        [Range(0f, 1f)]
+        public float rate;
+
         public int Score { get => m_score; set => m_score = value; }
 
         private void Awake()
@@ -48,9 +56,9 @@ namespace GameBasic
         // Start is called before the first frame update
         void Start()
         {
-           
-           
-           
+
+
+            m_curtimeLimit = timeLimit;
             if (IsComponentsNull()) return;
             guiMng.ShowGameGUI(false);
             
@@ -73,12 +81,50 @@ namespace GameBasic
             guiMng.ShowGameGUI(true);
             guiMng.UpdateGamePlayScore();
             auCtr.PlayBgm();
-
+           
 
         }
-       
+        #region Hieu ung chay tien
+        // Hieu ung chay tien
+        public void AddScore()
+        {
+            int scorebonus = 100;
+            m_newScore = m_curScore + scorebonus;
+            StartCoroutine(CountingAnim(m_curScore, m_newScore, true));
+        }
+
+
+        IEnumerator CountingAnim(int m_curNum, int newNum, bool isUp)
+        {
+            int count = m_curNum;
+
+            if (isUp)
+            {
+                while (count < newNum)
+                {
+                    count++;
+                    if (guiMng.gameplayScoreTxt)
+                        guiMng.gameplayScoreTxt.text = "Score: \n"  + count.ToString();
+                    yield return new WaitForSeconds(rate);
+                }
+            }
+            else
+            {
+                while (count > newNum)
+                {
+                    count--;
+                    if (guiMng.gameplayScoreTxt)
+                        guiMng.gameplayScoreTxt.text= "Score: \n"  + count.ToString();
+                    yield return new WaitForSeconds(rate);
                 
 
+                }
+
+            }
+            guiMng.gameplayScoreTxt.text = "Score: \n" + newNum.ToString();
+            m_curScore = m_newScore;
+        }
+        #endregion
 
         #region Tạo hieu ung dem so
 
@@ -108,7 +154,7 @@ namespace GameBasic
                     if (FruitPrefabs != null && m_curTimeDelay <= 0)
                     {
                         m_curspawnTime = 0;
-
+                        StartCoroutine(CountingDownTime());
                     }
                 }
 
@@ -155,13 +201,38 @@ namespace GameBasic
                 
             }
         }
-       
-        
+
+
         #endregion
 
+        #region Hieu ung chay thoi gian 
+        // Hieu ung thoi gian 1 man choi 
+        string IntToTime(float time)
+        {
+            float minutes = Mathf.Floor(time / 60);
+            float seconds = Mathf.Floor(time % 60);
+            return   minutes.ToString("00") + " : " + seconds.ToString("00");
+        }
+       
 
+        IEnumerator CountingDownTime()
+        {
+            while (m_curtimeLimit > 0)
+            {
+                yield return new WaitForSeconds(1f);
+                m_curtimeLimit--;
+                if (m_curtimeLimit <= 0 )
+                {
+                    // Không tạo thêm bóng.
+                    m_IsGameOver = false;
+                    // Hiển thị GameWinDialog.
 
+                }
+               guiMng.UpdateTimer(IntToTime(m_curtimeLimit));
+            }
+        }
 
+        #endregion
         public void ActivePlayer()
         {
             if (IsComponentsNull()) return;

@@ -12,6 +12,7 @@ namespace GameBasic
         public Dialog GameOverDialog;
         public Text mainCoinTxt;
         public Text gameplayScoreTxt;
+        public Text Timetext;
         // Start is called before the first frame update
         void Start()
         {
@@ -24,6 +25,12 @@ namespace GameBasic
             if (homeGUI)
                 homeGUI.SetActive(!isShow);
         }
+        public void UpdateTimer(string time)
+        {
+
+            if (Timetext)
+                Timetext.text ="Time: \n" + time.ToString();
+        }
         public void UpdateMainCoin()
         {
             if (mainCoinTxt)
@@ -32,7 +39,7 @@ namespace GameBasic
         public void UpdateGamePlayScore()
         {
             if (gameplayScoreTxt)
-               gameplayScoreTxt.text = Pref.Score.ToString();
+               gameplayScoreTxt.text = "Score: \n" + Pref.Score.ToString();
         }
     }
 }
