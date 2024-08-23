@@ -4,59 +4,66 @@ using UnityEngine;
 
 namespace GameBasic
 {
-
-
-    public static class Pref 
+    public static class Pref
     {
-       public static int bestScore
+        public static bool IsFirstTime
         {
-            set
-            {
-                int oldBestScore = PlayerPrefs.GetInt(Const.BEST_SCORE_PREF,0);
-                if (oldBestScore <= value)
-                    PlayerPrefs.SetInt(Const.BEST_SCORE_PREF, value);
-            }
-            get => PlayerPrefs.GetInt(Const.BEST_SCORE_PREF, 0);
+            set => SetBool(KeyPref.IsFirstTime.ToString(), value);
+            get => GetBool(KeyPref.IsFirstTime.ToString(), true);
+        }
 
-        }
-        public static int curPlayerID
+        public static bool IsCloudDataLoaded
         {
-            set => PlayerPrefs.SetInt(Const.CUR_PLAYER_ID_PREF, value);
-            get => PlayerPrefs.GetInt(Const.CUR_PLAYER_ID_PREF, 0);
+            set => SetBool(KeyPref.CloudDataLoaded.ToString(), value);
+            get => GetBool(KeyPref.CloudDataLoaded.ToString(), false);
         }
-        public static int Score
+
+        public static int SpriteOrder
         {
-            set => PlayerPrefs.SetInt(Const.SCORE_PREF, value);
-            get => PlayerPrefs.GetInt(Const.SCORE_PREF, 0);
+            set => PlayerPrefs.SetInt(KeyPref.SpriteOrder.ToString(), value);
+            get => PlayerPrefs.GetInt(KeyPref.SpriteOrder.ToString(), 0);
         }
-        public static int Coins
+
+        public static string GameData
         {
-            set => PlayerPrefs.SetInt(Const.COINS_PREF, value);
-            get => PlayerPrefs.GetInt(Const.COINS_PREF, 0);
+            set => PlayerPrefs.SetString(KeyPref.game_data_.ToString(), value);
+            get => PlayerPrefs.GetString(KeyPref.game_data_.ToString(), string.Empty);
         }
-        public static float musVol
+
+        public static void SetBool(string key, bool v)
         {
-            set => PlayerPrefs.SetFloat(Const.MUSIC_VOL_PREF, value);
-            get => PlayerPrefs.GetFloat(Const.MUSIC_VOL_PREF, 0.3f);
-        }
-        public static float sfxVol
-        {
-            set => PlayerPrefs.SetFloat(Const.SFX_VOL_PREF, value);
-            get => PlayerPrefs.GetFloat(Const.SFX_VOL_PREF, 1f);
-        }
-        public static void SetBool(string key, bool value)
-        {
-            if (value)
+            if (v)
             {
                 PlayerPrefs.SetInt(key, 1);
-
             }
             else
+            {
                 PlayerPrefs.SetInt(key, 0);
+            }
         }
-        public static bool GetBool(string key)
+
+        public static bool GetBool(string key, bool defaultValue)
         {
-            return PlayerPrefs.GetInt(key) == 1 ? true : false; 
+
+            if (PlayerPrefs.HasKey(key))
+            {
+                int valFromPlayer = PlayerPrefs.GetInt(key);
+
+                if (valFromPlayer == 1)
+                {
+                    return true;
+                }
+                else if (valFromPlayer == 0)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return defaultValue;
+            }
+
+            return defaultValue;
         }
     }
 }

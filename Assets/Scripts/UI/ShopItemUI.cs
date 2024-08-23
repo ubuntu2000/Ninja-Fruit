@@ -20,12 +20,12 @@ namespace GameBasic
                 // du lieu o  class data struct 
                 hub.sprite = item.previewImg;
             // Ktra da mo khoa nhan vat o class shopManager hay chua
-            bool isUnlocked = Pref.GetBool(Const.PLAYER_PREFIX_PREF + itemIdx);
+            bool isUnlocked = GameData.Ins.GetPlayerUnlocked(itemIdx);
             // Ktra nhan vat da mo khoa hay chua
             if(isUnlocked)
             {
                 // KTra truong hop nhan vat choi hien tai dang dc su dung
-                if (Pref.curPlayerID == itemIdx)
+                if (GameData.Ins.curPlayerId == itemIdx)
                 {
                     if (priceTxt)
                         priceTxt.text = "Active";

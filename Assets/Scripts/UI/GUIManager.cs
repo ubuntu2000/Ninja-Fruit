@@ -34,12 +34,12 @@ namespace GameBasic
         public void UpdateMainCoin()
         {
             if (mainCoinTxt)
-                mainCoinTxt.text = Pref.Coins.ToString();
+                mainCoinTxt.text = GameData.Ins.coin.ToString();
         }
         public void UpdateGamePlayScore()
         {
             if (gameplayScoreTxt)
-               gameplayScoreTxt.text = "Score: \n" + Pref.Score.ToString();
+               gameplayScoreTxt.text = "Score: \n" + GameData.Ins.score.ToString();
         }
     }
 }

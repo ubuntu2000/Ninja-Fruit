@@ -27,8 +27,8 @@ namespace GameBasic
         private void Start()
         {
             if (musicAus == null || SfxAus == null) return;
-            musicVol = Pref.musVol;
-            SfxVol = Pref.sfxVol;
+            musicVol = GameData.Ins.musicVol;
+            SfxVol = GameData.Ins.sfxVol;
 
             musicAus.volume = musicVol;
             SfxAus.volume = SfxVol;

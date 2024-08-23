@@ -25,8 +25,8 @@ namespace GameBasic
 
             if (IsComponentsNull()) return;
 
-            musicSlider.value = Pref.musVol;
-            sfxSlider.value = Pref.sfxVol;
+            musicSlider.value = GameData.Ins.musicVol;
+            sfxSlider.value = GameData.Ins.sfxVol;
 
 
         }
@@ -37,7 +37,7 @@ namespace GameBasic
 
             m_auCtr.musicVol = value;
             m_auCtr.musicAus.volume = value;
-            Pref.musVol = value;
+            GameData.Ins.musicVol = value;
         }
         public void OnSfxChange(float value)
         {
@@ -45,7 +45,7 @@ namespace GameBasic
 
             m_auCtr.SfxVol = value;
             m_auCtr.SfxAus.volume = value;
-            Pref.sfxVol = value;
+            GameData.Ins.sfxVol = value;
         }
     }
 }

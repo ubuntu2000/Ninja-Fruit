@@ -66,21 +66,22 @@ namespace GameBasic
         private void ItemEvent( ShopItem item, int itemIdx)
         {
             if (item == null) return;
-            bool isUnlocked = Pref.GetBool(Const.PLAYER_PREFIX_PREF + itemIdx);
+            bool isUnlocked = GameData.Ins.GetPlayerUnlocked(itemIdx);
             if(isUnlocked)
             {
-                if (itemIdx == Pref.curPlayerID) return;
+                if (itemIdx == GameData.Ins.curPlayerId) return;
 
-                Pref.curPlayerID = itemIdx;
+                GameData.Ins.curPlayerId = itemIdx;
 
            
 
                 UpdateUI();  
-            }else if(Pref.Coins >= item.price)
+            }else if(GameData.Ins.coin >= item.price)
             {
-                Pref.Coins -= item.price;
-                Pref.SetBool(Const.PLAYER_PREFIX_PREF + itemIdx, true);
-                Pref.curPlayerID = itemIdx;
+                GameData.Ins.coin -= item.price;
+                // Pref.SetBool(Const.PLAYER_PREFIX_PREF + itemIdx, true);
+                GameData.Ins.UpdatePlayerUnlocked(itemIdx, true);
+                GameData.Ins.curPlayerId= itemIdx;
 
                
 

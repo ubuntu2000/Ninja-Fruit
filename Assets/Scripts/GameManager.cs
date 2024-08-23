@@ -243,7 +243,7 @@ namespace GameBasic
 
             if (shopItems == null || shopItems.Length <= 0) return;
 
-            var newPlayerPb = shopItems[Pref.curPlayerID].playerPrefab;
+            var newPlayerPb = shopItems[GameData.Ins.curPlayerId].playerPrefab;
 
 
             if (newPlayerPb)
@@ -255,7 +255,8 @@ namespace GameBasic
             if (m_IsGameOver) return;
 
             m_IsGameOver = true;
-            Pref.bestScore = m_score;
+            // Pref.bestScore = m_score;
+            
             if (guiMng.GameOverDialog)
                 guiMng.GameOverDialog.Show(true);
             auCtr.PlaySound(auCtr.gameOver);

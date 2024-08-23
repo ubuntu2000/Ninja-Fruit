@@ -16,7 +16,7 @@ namespace GameBasic
             base.Show(isShow);
 
             if (bestScoreTxt)
-                bestScoreTxt.text = Pref.bestScore.ToString("00000");
+                bestScoreTxt.text = GameData.Ins.score.ToString("00000");
         }
         public void RePlay()
         {
