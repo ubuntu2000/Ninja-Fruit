@@ -6,12 +6,13 @@ namespace GameBasic
 {
     public class Fruit : MonoBehaviour, IComponentCheck
     {
-        public float moveSpeedBall = 100f;
+        
+        
+        private GameManager m_vacham;
+        
         Rigidbody2D m_rbFruit;
-       private GameManager m_vacham;
+        public float moveSpeedFruit = 350f;
         private bool m_IsDead;
-
-
 
         public void Start()
         {
@@ -20,31 +21,35 @@ namespace GameBasic
         }
         public bool IsComponentsNull()
         {
-          return  m_rbFruit == null || m_vacham == null; 
+          return m_rbFruit == null ||  m_vacham == null; 
         }
         private void FixedUpdate()
         {
             if (IsComponentsNull()) return;
-            MoveBall();
-        }
-       
-        void MoveBall()
-        {
-            m_rbFruit.velocity = Vector2.down * moveSpeedBall * Time.deltaTime;
+            MoveEnemy();
         }
 
+        void MoveEnemy()
+        {
+
+            m_rbFruit.velocity = Vector2.down * moveSpeedFruit * Time.deltaTime;
+        }
         public void Die()
         {
-            if (m_IsDead ) return;
-
+            if (IsComponentsNull() && m_IsDead) return;
+            
+            // if (m_Fruit.IsDead) return;
             m_IsDead = true;
+            
+            //  m_Fruit.IsDead = true;
             m_rbFruit.velocity = Vector2.zero;
-           // gameObject.layer = LayerMask.NameToLayer(Const.DEAD_ANIM);
-            if (m_vacham.auCtr)
-                m_vacham.auCtr.PlaySound(m_vacham.auCtr.enemyDead);
+            gameObject.layer = LayerMask.NameToLayer(Const.DEAD_LAYER);
+           // if (auCtr)
+               // auCtr.PlaySound(auCtr.enemyDead);
 
-            Destroy(gameObject, 2f);
+            Destroy(gameObject.GetComponent<Fruit>(), 1f);
         }
+
         private void OnCollisionEnter2D(Collision2D col)
         {
             if (col.gameObject.CompareTag(Const.PLAYER_TAG))
@@ -62,11 +67,21 @@ namespace GameBasic
             {
             if (col.gameObject.CompareTag(Const.DEADZONE_TAG))
              {
+                if(m_vacham.Heaths <= 0)
+                {
 
-                Die();
-               
-                Destroy(gameObject);
-
+                   
+                    Die();
+                    
+                   // m_vacham.SetIsGameOver(true);
+                   // m_vacham.GameOver();
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    m_vacham.IncrementHeaths(-1);
+                }
+            
                 Debug.Log("Da va cham voi DeadZone");
              }
             }
